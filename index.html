@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Translate any span of Earth time into rotations and years across all eight planets. No account, no tracking, no data collection."
+    />
+    <meta name="theme-color" content="#080916" />
+    <meta property="og:title" content="Galaxy Timekeeper" />
+    <meta
+      property="og:description"
+      content="One duration. Eight worlds. Completely different time."
+    />
+    <meta property="og:type" content="website" />
+    <title>Galaxy Timekeeper</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="js/data.js" defer></script>
+    <script src="js/calculations.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to the time controls</a>
+
+    <div class="cosmos" aria-hidden="true">
+      <span class="cosmos__glow cosmos__glow--one"></span>
+      <span class="cosmos__glow cosmos__glow--two"></span>
+    </div>
+
+    <header class="site-header shell">
+      <a class="brand" href="#top" aria-label="Galaxy Timekeeper home">
+        <svg class="brand__mark" viewBox="0 0 44 44" role="img" aria-hidden="true">
+          <circle cx="22" cy="22" r="6"></circle>
+          <ellipse cx="22" cy="22" rx="18" ry="8"></ellipse>
+          <path d="M22 2v5M22 37v5M2 22h5M37 22h5"></path>
+        </svg>
+        <span>
+          <strong>Galaxy Timekeeper</strong>
+          <small>Galaxien-Zeitmesser</small>
+        </span>
+      </a>
+
+      <button
+        class="language-toggle"
+        id="language-toggle"
+        type="button"
+        aria-label="Deutsche Sprache einschalten"
+      >
+        <span class="language-toggle__active">EN</span>
+        <span aria-hidden="true">/</span>
+        <span>DE</span>
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero shell" aria-labelledby="hero-title">
+        <p class="eyebrow" data-i18n="heroEyebrow">A private, pocket-sized time laboratory</p>
+        <h1 id="hero-title" data-i18n="heroTitle">One duration.<br /><em>Eight different worlds.</em></h1>
+        <p class="hero__intro" data-i18n="heroIntro">
+          Turn an ordinary stretch of Earth time into planetary rotations and years — and feel how
+          dramatically time changes across our Solar System.
+        </p>
+
+        <ul class="trust-row" aria-label="Product principles">
+          <li><span aria-hidden="true">○</span><span data-i18n="trustNoAccount">No account</span></li>
+          <li><span aria-hidden="true">○</span><span data-i18n="trustNoTracking">No tracking</span></li>
+          <li><span aria-hidden="true">○</span><span data-i18n="trustLocal">Calculations stay on-device</span></li>
+        </ul>
+      </section>
+
+      <section class="time-lab shell" id="main-content" aria-labelledby="lab-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-index">01</p>
+            <h2 id="lab-title" data-i18n="labTitle">Set your time span</h2>
+          </div>
+          <button class="live-button" id="live-button" type="button" aria-pressed="false">
+            <span class="live-button__dot" aria-hidden="true"></span>
+            <span data-i18n="liveStart">Start live pulse</span>
+          </button>
+        </div>
+
+        <div class="control-panel">
+          <div class="duration-fields">
+            <label class="field-label" for="duration-value" data-i18n="durationLabel">Earth duration</label>
+            <div class="duration-fields__row">
+              <input
+                id="duration-value"
+                name="duration"
+                type="number"
+                min="0"
+                step="any"
+                inputmode="decimal"
+                value="1"
+                aria-describedby="duration-help"
+              />
+              <select id="duration-unit" name="duration-unit" aria-label="Duration unit">
+                <option value="seconds" data-i18n="unitSeconds">seconds</option>
+                <option value="minutes" data-i18n="unitMinutes">minutes</option>
+                <option value="hours" data-i18n="unitHours">hours</option>
+                <option value="days" data-i18n="unitDays">days</option>
+                <option value="years" data-i18n="unitYears" selected>years</option>
+              </select>
+            </div>
+            <p class="field-help" id="duration-help" data-i18n="durationHelp">
+              Enter a duration — never a birth date or personal detail.
+            </p>
+          </div>
+
+          <div class="scale-control">
+            <div class="scale-control__labels">
+              <label for="scale-slider" data-i18n="scaleLabel">Cosmic scale</label>
+              <output id="earth-duration-output" for="scale-slider">1 Earth year</output>
+            </div>
+            <input
+              id="scale-slider"
+              type="range"
+              min="0"
+              max="17.638"
+              step="0.001"
+              value="7.499"
+              aria-label="Adjust duration on a logarithmic scale"
+            />
+            <div class="scale-control__ends" aria-hidden="true">
+              <span data-i18n="scaleSecond">1 second</span>
+              <span data-i18n="scaleUniverse">age of the universe</span>
+            </div>
+          </div>
+
+          <div class="preset-wrap">
+            <span class="field-label" data-i18n="presetsLabel">Quick journeys</span>
+            <div class="presets" id="presets" role="group" aria-label="Duration presets">
+              <button type="button" data-seconds="900" data-i18n="presetCoffee">Coffee break</button>
+              <button type="button" data-seconds="86400" data-i18n="presetDay">Earth day</button>
+              <button type="button" data-seconds="31557600" data-i18n="presetYear">Earth year</button>
+              <button type="button" data-seconds="3155760000" data-i18n="presetCentury">A century</button>
+              <button type="button" data-seconds="143281008000000000" data-i18n="presetEarthAge">Age of Earth</button>
+              <button type="button" data-seconds="435481920000000000" data-i18n="presetUniverse">Age of universe</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+      </section>
+
+      <section class="world-focus shell" aria-labelledby="world-title">
+        <div class="section-heading section-heading--stacked">
+          <div>
+            <p class="section-index">02</p>
+            <h2 id="world-title" data-i18n="worldTitle">Choose a world</h2>
+          </div>
+          <p data-i18n="worldHint">Tap a planet to bring its rhythm into focus.</p>
+        </div>
+
+        <div class="planet-selector" id="planet-selector" role="list" aria-label="Planets"></div>
+
+        <article class="focus-card" id="focus-card">
+          <div class="focus-card__visual" aria-hidden="true">
+            <div class="orbit-line orbit-line--outer"></div>
+            <div class="orbit-line orbit-line--inner"></div>
+            <div class="planet planet--large" id="focus-planet-visual"></div>
+            <span class="focus-card__planet-number" id="focus-planet-number">01 / 08</span>
+          </div>
+
+          <div class="focus-card__content">
+            <p class="eyebrow" id="focus-kicker">The swift messenger</p>
+            <h3 id="focus-name">Mercury</h3>
+            <p class="focus-card__fact" id="focus-fact"></p>
+
+            <div class="focus-results">
+              <div class="metric">
+                <span class="metric__label" data-i18n="rotationsLabel">Axis rotations</span>
+                <strong id="focus-rotations">0</strong>
+                <small id="focus-rotation-length"></small>
+              </div>
+              <div class="metric">
+                <span class="metric__label" data-i18n="orbitsLabel">Planet years</span>
+                <strong id="focus-orbits">0</strong>
+                <small id="focus-orbit-length"></small>
+              </div>
+            </div>
+
+            <div class="orbit-progress">
+              <div class="orbit-progress__copy">
+                <span data-i18n="currentOrbit">Current orbit progress</span>
+                <strong id="orbit-progress-label">0%</strong>
+              </div>
+              <div
+                class="orbit-progress__track"
+                id="orbit-progress-track"
+                role="progressbar"
+                aria-label="Current orbit progress"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <span></span>
+              </div>
+            </div>
+
+            <button class="copy-button" id="copy-button" type="button">
+              <span data-i18n="copyResult">Copy this result</span>
+              <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <section class="comparison shell" aria-labelledby="comparison-title">
+        <div class="section-heading section-heading--stacked">
+          <div>
+            <p class="section-index">03</p>
+            <h2 id="comparison-title" data-i18n="comparisonTitle">All eight rhythms</h2>
+          </div>
+          <p data-i18n="comparisonHint">The same Earth duration, translated at once.</p>
+        </div>
+
+        <div class="insight-card" aria-live="polite">
+          <span class="insight-card__icon" aria-hidden="true">✦</span>
+          <p id="dynamic-insight"></p>
+        </div>
+
+        <div class="planet-grid" id="planet-grid"></div>
+      </section>
+
+      <section class="science shell" aria-labelledby="science-title">
+        <div class="section-heading section-heading--stacked">
+          <div>
+            <p class="section-index">04</p>
+            <h2 id="science-title" data-i18n="scienceTitle">What are we measuring?</h2>
+          </div>
+        </div>
+
+        <div class="science-grid">
+          <article>
+            <span class="science-grid__symbol" aria-hidden="true">↻</span>
+            <h3 data-i18n="rotationTitle">A rotation</h3>
+            <p data-i18n="rotationText">
+              One complete spin around a planet's axis, measured against distant stars. Retrograde
+              planets spin in the opposite direction; the duration shown here is always positive.
+            </p>
+          </article>
+          <article>
+            <span class="science-grid__symbol" aria-hidden="true">◎</span>
+            <h3 data-i18n="orbitTitle">A planet year</h3>
+            <p data-i18n="orbitText">
+              One complete orbit around the Sun. The farther a planet travels from the Sun, the longer
+              its year usually becomes.
+            </p>
+          </article>
+        </div>
+
+        <details class="sources">
+          <summary data-i18n="sourcesSummary">Data method &amp; NASA sources</summary>
+          <div class="sources__content">
+            <p data-i18n="sourcesText">
+              Calculations use rounded rotation and orbital periods published by NASA. Results are
+              educational approximations, not mission-planning ephemerides.
+            </p>
+            <ul id="source-links"></ul>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <footer class="site-footer shell">
+      <div>
+        <strong>Galaxy Timekeeper</strong>
+        <p data-i18n="footerBuilt">Built with Codex and GPT-5.6 for OpenAI Build Week 2026.</p>
+      </div>
+      <p class="privacy-stamp">
+        <span aria-hidden="true">◇</span>
+        <span data-i18n="footerPrivacy">Zero accounts. Zero stored data.</span>
+      </p>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <noscript>
+      <div class="noscript">Galaxy Timekeeper needs JavaScript for its on-device calculations.</div>
+    </noscript>
+  </body>
+</html>

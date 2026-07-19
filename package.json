@@ -1,0 +1,20 @@
+{
+  "name": "galaxy-timekeeper",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A mobile-first planetary time translator built for OpenAI Build Week 2026.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "python3 -m http.server 4173",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check js/data.js && node --check js/calculations.js && node --check js/app.js"
+  },
+  "keywords": [
+    "astronomy",
+    "education",
+    "time",
+    "codex",
+    "openai-build-week"
+  ],
+  "license": "MIT"
+}
