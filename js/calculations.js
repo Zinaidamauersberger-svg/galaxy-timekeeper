@@ -3,6 +3,7 @@
 
   const EARTH_DAY_SECONDS = 86_400;
   const EARTH_YEAR_DAYS = 365.25;
+  const GALACTIC_YEAR_EARTH_YEARS = 230_000_000;
   const unitFactors = Object.freeze({
     seconds: 1,
     minutes: 60,
@@ -58,6 +59,71 @@
     }
 
     return planets.map((planet) => calculatePlanetTime(durationSeconds, planet));
+  }
+
+  function calculateAgeSeconds(birthTimestamp, currentTimestamp = Date.now()) {
+    const birth = Number(birthTimestamp);
+    const current = Number(currentTimestamp);
+
+    if (!Number.isFinite(birth) || !Number.isFinite(current)) {
+      throw new TypeError("Birth and current timestamps must be finite numbers.");
+    }
+
+    if (birth > current) {
+      throw new RangeError("Birth timestamp cannot be in the future.");
+    }
+
+    return (current - birth) / 1_000;
+  }
+
+  function calculateGalacticMoment(
+    durationSeconds,
+    galacticYearEarthYears = GALACTIC_YEAR_EARTH_YEARS,
+  ) {
+    const years = Number(galacticYearEarthYears);
+
+    if (!Number.isFinite(durationSeconds) || durationSeconds < 0) {
+      throw new RangeError("Duration seconds must be finite and non-negative.");
+    }
+
+    if (!Number.isFinite(years) || years <= 0) {
+      throw new RangeError("Galactic year must be a finite, positive number of Earth years.");
+    }
+
+    const galacticYearSeconds = durationToSeconds(years, "years");
+    const orbitFraction = durationSeconds / galacticYearSeconds;
+    const galacticClockSeconds = orbitFraction * EARTH_DAY_SECONDS;
+
+    return {
+      galacticClockSeconds,
+      galacticYearSeconds,
+      orbitFraction,
+      orbitPercent: orbitFraction * 100,
+      clockAngleDegrees: orbitFraction * 360,
+    };
+  }
+
+  function calculateSolarRotations(durationSeconds, equatorDays = 25, polarDays = 36) {
+    const equator = Number(equatorDays);
+    const poles = Number(polarDays);
+
+    if (!Number.isFinite(durationSeconds) || durationSeconds < 0) {
+      throw new RangeError("Duration seconds must be finite and non-negative.");
+    }
+
+    if (!Number.isFinite(equator) || !Number.isFinite(poles) || equator <= 0 || poles <= 0) {
+      throw new RangeError("Solar rotation periods must be finite and positive.");
+    }
+
+    const equatorialRotations = durationSeconds / (equator * EARTH_DAY_SECONDS);
+    const polarRotations = durationSeconds / (poles * EARTH_DAY_SECONDS);
+
+    return {
+      equatorialRotations,
+      polarRotations,
+      minimum: Math.min(equatorialRotations, polarRotations),
+      maximum: Math.max(equatorialRotations, polarRotations),
+    };
   }
 
   function secondsToLogValue(seconds) {
@@ -120,7 +186,8 @@
     }
 
     if (absolute < 0.0001) {
-      return value.toExponential(2).replace("e+", "e");
+      const exponential = value.toExponential(2).replace("e+", "e");
+      return language === "de" ? exponential.replace(".", ",") : exponential;
     }
 
     const maximumFractionDigits =
@@ -178,9 +245,13 @@
   const api = Object.freeze({
     EARTH_DAY_SECONDS,
     EARTH_YEAR_DAYS,
+    GALACTIC_YEAR_EARTH_YEARS,
     UNIT_FACTORS: unitFactors,
+    calculateAgeSeconds,
     calculateAllPlanets,
+    calculateGalacticMoment,
     calculatePlanetTime,
+    calculateSolarRotations,
     clamp,
     durationToSeconds,
     formatCosmicNumber,

@@ -259,7 +259,8 @@ em {
 
 .hero h1 em {
   letter-spacing: -0.055em;
-  white-space: nowrap;
+  hyphens: auto;
+  white-space: normal;
 }
 
 .hero__intro {
@@ -291,6 +292,7 @@ em {
   font-weight: 900;
 }
 
+.personal-lab,
 .time-lab,
 .world-focus,
 .comparison,
@@ -298,6 +300,322 @@ em {
   scroll-margin-top: 24px;
   padding-block: 56px;
   border-top: 1px solid var(--line);
+}
+
+.personal-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.birth-form,
+.privacy-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), transparent 52%),
+    rgba(12, 13, 29, 0.9);
+  box-shadow: var(--shadow);
+}
+
+.birth-form {
+  padding: 22px;
+}
+
+.birth-form__fields {
+  display: grid;
+  gap: 16px;
+}
+
+.birth-form__fields > div {
+  min-width: 0;
+}
+
+.birth-form input {
+  width: 100%;
+  min-height: 58px;
+  margin-top: 8px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.055);
+  color-scheme: dark;
+  font-size: 1rem;
+  font-weight: 680;
+}
+
+.birth-form input:hover {
+  border-color: rgba(244, 196, 119, 0.32);
+}
+
+.reveal-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 54px;
+  margin-top: 22px;
+  padding: 0 17px;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(110deg, rgba(244, 196, 119, 0.2), rgba(217, 114, 255, 0.12));
+  color: var(--gold-soft);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.reveal-button:hover {
+  background: linear-gradient(110deg, rgba(244, 196, 119, 0.28), rgba(217, 114, 255, 0.18));
+  transform: translateY(-1px);
+}
+
+.privacy-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 13px;
+  align-content: start;
+  padding: 21px;
+  border-color: rgba(117, 232, 228, 0.2);
+  background: linear-gradient(145deg, rgba(117, 232, 228, 0.08), rgba(12, 13, 29, 0.9));
+  box-shadow: none;
+}
+
+.privacy-card__icon {
+  color: var(--cyan);
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.privacy-card strong {
+  display: block;
+  color: var(--cyan);
+  font-size: 0.8rem;
+}
+
+.privacy-card p {
+  margin: 6px 0 10px;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.privacy-card a {
+  color: var(--gold-soft);
+  font-size: 0.72rem;
+  text-underline-offset: 3px;
+}
+
+.cosmic-result {
+  position: relative;
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 17% 22%, rgba(217, 114, 255, 0.14), transparent 28rem),
+    radial-gradient(circle at 88% 72%, rgba(117, 232, 228, 0.09), transparent 26rem),
+    rgba(10, 11, 27, 0.95);
+  box-shadow: var(--shadow);
+  scroll-margin-top: 20px;
+}
+
+.cosmic-result__header {
+  padding: 24px 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cosmic-result__header h3 {
+  margin: 4px 0 3px;
+  font-size: clamp(2rem, 10vw, 4.4rem);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.cosmic-result__header h3 span:last-child {
+  color: var(--muted-strong);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.42em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.cosmic-result__header > p:last-child {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.galactic-reveal {
+  display: grid;
+  gap: 20px;
+  align-items: center;
+  padding: 28px 22px;
+}
+
+.galactic-clock {
+  position: relative;
+  width: min(100%, 290px);
+  margin-inline: auto;
+  aspect-ratio: 1;
+}
+
+.galactic-clock svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 24px rgba(217, 114, 255, 0.18));
+}
+
+.galactic-clock__halo,
+.galactic-clock__face {
+  fill: rgba(255, 255, 255, 0.018);
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1;
+}
+
+.galactic-clock__halo {
+  fill: none;
+  stroke: rgba(217, 114, 255, 0.18);
+  stroke-dasharray: 2 9;
+}
+
+.galactic-clock__face {
+  stroke: rgba(244, 196, 119, 0.3);
+  stroke-width: 1.5;
+}
+
+.galactic-clock__ticks {
+  fill: none;
+  stroke: rgba(247, 231, 196, 0.52);
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.galactic-clock__hand {
+  fill: var(--cyan);
+  stroke: var(--cyan);
+  stroke-linecap: round;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 8px rgba(117, 232, 228, 0.8));
+  transition: transform 1s var(--ease);
+}
+
+.galactic-clock__center {
+  fill: var(--gold-soft);
+  stroke: var(--gold);
+  stroke-width: 2;
+}
+
+.galactic-clock__label {
+  position: absolute;
+  color: var(--muted);
+  font-size: 0.55rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.galactic-clock__label--top,
+.galactic-clock__label--bottom {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.galactic-clock__label--top { top: -2px; }
+.galactic-clock__label--bottom { bottom: -2px; }
+.galactic-clock__label--left { top: 50%; left: -3px; transform: translateY(-50%); }
+.galactic-clock__label--right { top: 50%; right: -3px; transform: translateY(-50%); }
+
+.galactic-reveal__copy {
+  min-width: 0;
+}
+
+.galactic-reveal__copy .metric__label {
+  white-space: normal;
+}
+
+.galactic-digital {
+  display: block;
+  max-width: 100%;
+  margin: 9px 0 12px;
+  overflow: hidden;
+  color: var(--gold-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(1.3rem, 7.5vw, 3rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 750;
+  letter-spacing: -0.055em;
+  text-overflow: ellipsis;
+}
+
+.galactic-reveal__lead {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1rem, 3.6vw, 1.25rem);
+}
+
+.science-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.cosmic-metrics {
+  display: grid;
+  gap: 9px;
+  padding: 0 22px 24px;
+}
+
+.cosmic-metric {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1px 11px;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.cosmic-metric > span {
+  grid-row: 1 / 3;
+  color: var(--gold);
+  font-size: 1.2rem;
+}
+
+.cosmic-metric strong {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--gold-soft);
+  font-size: 1.12rem;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+}
+
+.cosmic-metric small {
+  color: var(--muted);
+  font-size: 0.64rem;
+}
+
+.meaning-card {
+  margin: 0;
+  padding: 24px 22px 27px;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(115deg, rgba(244, 196, 119, 0.08), rgba(217, 114, 255, 0.07));
+}
+
+.meaning-card p {
+  max-width: 820px;
+  margin: 0;
+  color: var(--muted-strong);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 3.8vw, 1.45rem);
+  font-style: italic;
+}
+
+.meaning-card strong {
+  display: block;
+  margin-top: 15px;
+  color: var(--gold-soft);
+  font-size: 0.78rem;
 }
 
 .section-heading {
@@ -1142,6 +1460,34 @@ em {
     padding: 30px;
   }
 
+  .birth-form {
+    padding: 30px;
+  }
+
+  .birth-form__fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cosmic-result__header,
+  .galactic-reveal,
+  .meaning-card {
+    padding-inline: 30px;
+  }
+
+  .cosmic-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-inline: 30px;
+  }
+
+  .cosmic-metric {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .cosmic-metric > span {
+    grid-row: auto;
+  }
+
   .planet-selector {
     margin-inline: 0;
     padding-inline: 0;
@@ -1159,6 +1505,7 @@ em {
 }
 
 @media (min-width: 820px) {
+  .personal-lab,
   .time-lab,
   .world-focus,
   .comparison,
@@ -1175,6 +1522,24 @@ em {
   .control-panel {
     grid-template-columns: minmax(260px, 0.72fr) minmax(350px, 1.28fr);
     gap: 28px 40px;
+  }
+
+  .personal-panel {
+    grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.55fr);
+  }
+
+  .privacy-card {
+    padding: 28px;
+  }
+
+  .galactic-reveal {
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: 48px;
+    padding-block: 38px;
+  }
+
+  .science-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .preset-wrap {

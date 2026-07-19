@@ -20,6 +20,7 @@ for (const file of scriptFiles) {
 copyFileSync(".openai/hosting.json", "dist/.openai/hosting.json");
 
 const repositoryFiles = [
+  ".openai/hosting.json",
   ".gitignore",
   "DEVPOST_SUBMISSION.md",
   "LICENSE",
@@ -34,9 +35,11 @@ const repositoryFiles = [
   "js/calculations.js",
   "js/data.js",
   "package.json",
+  "package-lock.json",
   "scripts/build.mjs",
   "styles.css",
   "tests/calculations.test.js",
+  "vite.config.js",
 ];
 
 const archivePath = "dist/galaxy-timekeeper-source.tar.gz";

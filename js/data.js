@@ -119,6 +119,9 @@
   global.GALAXY_DATA = Object.freeze({
     EARTH_DAY_SECONDS: 86_400,
     EARTH_YEAR_DAYS: 365.25,
+    GALACTIC_YEAR_EARTH_YEARS: 230_000_000,
+    SOLAR_ROTATION_DAYS: Object.freeze({ equator: 25, poles: 36 }),
+    SUN_SOURCE: "https://science.nasa.gov/sun/facts/",
     MAX_DURATION_SECONDS: 13_800_000_000 * 365.25 * 86_400,
     PLANETS: Object.freeze(planets.map((planet) => Object.freeze(planet))),
   });

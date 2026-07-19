@@ -65,3 +65,39 @@ test("finds the fastest rotational and orbital rhythms", () => {
   assert.equal(extremes.mostOrbits.planet.id, "mercury");
   assert.equal(extremes.mostRotations.planet.id, "jupiter");
 });
+
+test("maps forty Earth years to about 0.015 galactic seconds", () => {
+  const fortyYears = calculations.durationToSeconds(40, "years");
+  const result = calculations.calculateGalacticMoment(fortyYears);
+
+  assert.ok(Math.abs(result.galacticClockSeconds - 0.015026086956521738) < 1e-12);
+  assert.ok(Math.abs(result.orbitFraction - 40 / 230_000_000) < 1e-18);
+});
+
+test("maps one galactic orbit to a complete 24-hour clock", () => {
+  const galacticYear = calculations.durationToSeconds(230_000_000, "years");
+  const result = calculations.calculateGalacticMoment(galacticYear);
+
+  assert.equal(result.galacticClockSeconds, 86_400);
+  assert.equal(result.orbitFraction, 1);
+  assert.equal(result.clockAngleDegrees, 360);
+});
+
+test("calculates the Sun's latitude-dependent rotation range", () => {
+  const fortyYears = calculations.durationToSeconds(40, "years");
+  const result = calculations.calculateSolarRotations(fortyYears);
+
+  assert.ok(Math.abs(result.minimum - 405.8333333333333) < 1e-10);
+  assert.ok(Math.abs(result.maximum - 584.4) < 1e-10);
+});
+
+test("calculates elapsed age and rejects future birth moments", () => {
+  assert.equal(calculations.calculateAgeSeconds(1_000, 61_000), 60);
+  assert.throws(() => calculations.calculateAgeSeconds(61_000, 1_000), RangeError);
+  assert.throws(() => calculations.calculateAgeSeconds("unknown", 1_000), TypeError);
+});
+
+test("localizes very small scientific values in German", () => {
+  assert.equal(calculations.formatCosmicNumber(0.0000174, "en"), "1.74e-5");
+  assert.equal(calculations.formatCosmicNumber(0.0000174, "de"), "1,74e-5");
+});

@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Translate any span of Earth time into rotations and years across all eight planets. No account, no tracking, no data collection."
+      content="Turn your lifetime into a galactic moment and compare your age across the Solar System. No account, no tracking, no stored data."
     />
     <meta name="theme-color" content="#080916" />
     <meta property="og:title" content="Galaxy Timekeeper" />
     <meta
       property="og:description"
-      content="One duration. Eight worlds. Completely different time."
+      content="Your lifetime is a cosmic blink. Discover what it means across the Galaxy and all eight planets."
     />
     <meta property="og:type" content="website" />
     <title>Galaxy Timekeeper</title>
@@ -22,7 +22,7 @@
     <script src="js/app.js" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to the time controls</a>
+    <a class="skip-link" href="#main-content">Skip to your cosmic age</a>
 
     <div class="cosmos" aria-hidden="true">
       <span class="cosmos__glow cosmos__glow--one"></span>
@@ -56,11 +56,11 @@
 
     <main id="top">
       <section class="hero shell" aria-labelledby="hero-title">
-        <p class="eyebrow" data-i18n="heroEyebrow">A private, pocket-sized time laboratory</p>
-        <h1 id="hero-title" data-i18n="heroTitle">One duration.<br /><em>Eight different worlds.</em></h1>
+        <p class="eyebrow" data-i18n="heroEyebrow">Your life, translated into cosmic time</p>
+        <h1 id="hero-title" data-i18n="heroTitle">One life.<br /><em>A cosmic blink.</em></h1>
         <p class="hero__intro" data-i18n="heroIntro">
-          Turn an ordinary stretch of Earth time into planetary rotations and years — and feel how
-          dramatically time changes across our Solar System.
+          See how old you are on every planet — and how tiny your whole lifetime becomes on the
+          Milky Way's 24-hour clock.
         </p>
 
         <ul class="trust-row" aria-label="Product principles">
@@ -70,11 +70,121 @@
         </ul>
       </section>
 
-      <section class="time-lab shell" id="main-content" aria-labelledby="lab-title">
-        <div class="section-heading">
+      <section class="personal-lab shell" id="main-content" aria-labelledby="personal-title">
+        <div class="section-heading section-heading--stacked">
           <div>
             <p class="section-index">01</p>
-            <h2 id="lab-title" data-i18n="labTitle">Set your time span</h2>
+            <h2 id="personal-title" data-i18n="personalTitle">Reveal your cosmic moment</h2>
+          </div>
+          <p data-i18n="personalHint">Your birth date is calculated only in this browser tab.</p>
+        </div>
+
+        <div class="personal-panel">
+          <form class="birth-form" id="age-form" novalidate>
+            <div class="birth-form__fields">
+              <div>
+                <label class="field-label" for="birth-date" data-i18n="birthDateLabel">Your birth date</label>
+                <input id="birth-date" name="birth-date" type="date" autocomplete="off" required />
+              </div>
+              <div>
+                <label class="field-label" for="birth-time" data-i18n="birthTimeLabel">Birth time (optional)</label>
+                <input id="birth-time" name="birth-time" type="time" autocomplete="off" step="60" />
+              </div>
+            </div>
+
+            <p class="field-help" data-i18n="birthHelp">
+              No time? No problem — the result will be accurate to the day.
+            </p>
+
+            <button class="reveal-button" type="submit">
+              <span data-i18n="revealButton">Reveal my cosmic moment</span>
+              <span aria-hidden="true">✦</span>
+            </button>
+            <p class="form-error" id="age-error" role="alert" hidden></p>
+          </form>
+
+          <aside class="privacy-card">
+            <span class="privacy-card__icon" aria-hidden="true">◇</span>
+            <div>
+              <strong data-i18n="privacyTitle">Private by design</strong>
+              <p data-i18n="privacyText">
+                Nothing is uploaded or saved. Refresh the page and your entry disappears.
+              </p>
+              <a href="#duration-lab" data-i18n="privacyAlternative">Prefer not to enter a date? Use your age below.</a>
+            </div>
+          </aside>
+        </div>
+
+        <article class="cosmic-result" id="cosmic-result" aria-live="polite" hidden>
+          <header class="cosmic-result__header">
+            <p class="eyebrow" data-i18n="resultEyebrow">Your time on Earth</p>
+            <h3><span id="age-years-output">—</span> <span data-i18n="earthYearsLabel">Earth years</span></h3>
+            <p id="age-exact-output"></p>
+          </header>
+
+          <div class="galactic-reveal">
+            <div class="galactic-clock" id="galactic-clock" role="img" aria-label="Galactic 24-hour clock">
+              <svg viewBox="0 0 240 240" aria-hidden="true">
+                <circle class="galactic-clock__halo" cx="120" cy="120" r="104"></circle>
+                <circle class="galactic-clock__face" cx="120" cy="120" r="92"></circle>
+                <g class="galactic-clock__ticks">
+                  <path d="M120 28v13M120 199v13M28 120h13M199 120h13"></path>
+                  <path d="M74 40.3l6.5 11.2M159.5 188.5l6.5 11.2M40.3 74l11.2 6.5M188.5 159.5l11.2 6.5M40.3 166l11.2-6.5M188.5 80.5l11.2-6.5M74 199.7l6.5-11.2M159.5 51.5l6.5-11.2"></path>
+                </g>
+                <g class="galactic-clock__hand" id="galactic-hand">
+                  <line x1="120" y1="120" x2="120" y2="39"></line>
+                  <circle cx="120" cy="39" r="5"></circle>
+                </g>
+                <circle class="galactic-clock__center" cx="120" cy="120" r="8"></circle>
+              </svg>
+              <span class="galactic-clock__label galactic-clock__label--top">00:00</span>
+              <span class="galactic-clock__label galactic-clock__label--right">06:00</span>
+              <span class="galactic-clock__label galactic-clock__label--bottom">12:00</span>
+              <span class="galactic-clock__label galactic-clock__label--left">18:00</span>
+            </div>
+
+            <div class="galactic-reveal__copy">
+              <p class="metric__label" data-i18n="galacticClockLabel">Your life on the galactic 24-hour clock</p>
+              <output class="galactic-digital" id="galactic-clock-output">00:00:00.00000</output>
+              <p class="galactic-reveal__lead" id="galactic-lead"></p>
+              <p class="science-note" data-i18n="galacticAssumption">
+                Based on an estimated 230 million Earth years for one Solar System orbit around the Milky Way.
+              </p>
+            </div>
+          </div>
+
+          <div class="cosmic-metrics">
+            <div class="cosmic-metric">
+              <span aria-hidden="true">☉</span>
+              <strong id="solar-rotations-output">—</strong>
+              <small data-i18n="solarRotationsLabel">estimated Sun rotations</small>
+            </div>
+            <div class="cosmic-metric">
+              <span aria-hidden="true">◎</span>
+              <strong id="galactic-orbit-output">—</strong>
+              <small data-i18n="galacticOrbitLabel">of one Milky Way orbit</small>
+            </div>
+            <div class="cosmic-metric">
+              <span aria-hidden="true">↻</span>
+              <strong id="earth-days-output">—</strong>
+              <small data-i18n="earthDaysLabel">days lived on Earth</small>
+            </div>
+          </div>
+
+          <blockquote class="meaning-card">
+            <p data-i18n="meaningText">
+              On the scale of the Galaxy, your life is a blink. For you — and for the people you touch — that blink can mean everything.
+            </p>
+            <strong data-i18n="meaningQuestion">Who and what will you give your blink to?</strong>
+          </blockquote>
+        </article>
+      </section>
+
+      <section class="time-lab shell" id="duration-lab" aria-labelledby="lab-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-index">02</p>
+            <h2 id="lab-title" data-i18n="labTitle">Explore any time span</h2>
           </div>
           <button class="live-button" id="live-button" type="button" aria-pressed="false">
             <span class="live-button__dot" aria-hidden="true"></span>
@@ -105,7 +215,7 @@
               </select>
             </div>
             <p class="field-help" id="duration-help" data-i18n="durationHelp">
-              Enter a duration — never a birth date or personal detail.
+              Enter any duration manually. Nothing you type is stored.
             </p>
           </div>
 
@@ -148,7 +258,7 @@
       <section class="world-focus shell" aria-labelledby="world-title">
         <div class="section-heading section-heading--stacked">
           <div>
-            <p class="section-index">02</p>
+            <p class="section-index">03</p>
             <h2 id="world-title" data-i18n="worldTitle">Choose a world</h2>
           </div>
           <p data-i18n="worldHint">Tap a planet to bring its rhythm into focus.</p>
@@ -211,7 +321,7 @@
       <section class="comparison shell" aria-labelledby="comparison-title">
         <div class="section-heading section-heading--stacked">
           <div>
-            <p class="section-index">03</p>
+            <p class="section-index">04</p>
             <h2 id="comparison-title" data-i18n="comparisonTitle">All eight rhythms</h2>
           </div>
           <p data-i18n="comparisonHint">The same Earth duration, translated at once.</p>
@@ -228,7 +338,7 @@
       <section class="science shell" aria-labelledby="science-title">
         <div class="section-heading section-heading--stacked">
           <div>
-            <p class="section-index">04</p>
+            <p class="section-index">05</p>
             <h2 id="science-title" data-i18n="scienceTitle">What are we measuring?</h2>
           </div>
         </div>
@@ -240,6 +350,13 @@
             <p data-i18n="rotationText">
               One complete spin around a planet's axis, measured against distant stars. Retrograde
               planets spin in the opposite direction; the duration shown here is always positive.
+            </p>
+          </article>
+          <article>
+            <span class="science-grid__symbol" aria-hidden="true">✦</span>
+            <h3 data-i18n="galacticYearTitle">A galactic year</h3>
+            <p data-i18n="galacticYearText">
+              One orbit of our Solar System around the Milky Way. NASA estimates about 230 million Earth years, so personal results are intentionally approximate.
             </p>
           </article>
           <article>
@@ -256,8 +373,7 @@
           <summary data-i18n="sourcesSummary">Data method &amp; NASA sources</summary>
           <div class="sources__content">
             <p data-i18n="sourcesText">
-              Calculations use rounded rotation and orbital periods published by NASA. Results are
-              educational approximations, not mission-planning ephemerides.
+              Calculations use rounded planetary, solar, and galactic periods published by NASA. Results are educational approximations, not mission-planning ephemerides.
             </p>
             <ul id="source-links"></ul>
           </div>
