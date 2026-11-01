@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 
@@ -7,7 +7,6 @@ const scriptFiles = ["app.js", "calculations.js", "data.js"];
 
 mkdirSync("dist/js", { recursive: true });
 mkdirSync("dist/server", { recursive: true });
-mkdirSync("dist/.openai", { recursive: true });
 
 for (const file of rootFiles) {
   copyFileSync(file, `dist/${file}`);
@@ -17,10 +16,14 @@ for (const file of scriptFiles) {
   copyFileSync(`js/${file}`, `dist/js/${file}`);
 }
 
-copyFileSync(".openai/hosting.json", "dist/.openai/hosting.json");
+const hostingConfig = ".openai/hosting.json";
+if (existsSync(hostingConfig)) {
+  mkdirSync("dist/.openai", { recursive: true });
+  copyFileSync(hostingConfig, `dist/${hostingConfig}`);
+}
 
 const repositoryFiles = [
-  ".openai/hosting.json",
+  ...(existsSync(hostingConfig) ? [hostingConfig] : []),
   ".gitignore",
   "DEVPOST_SUBMISSION.md",
   "LICENSE",
